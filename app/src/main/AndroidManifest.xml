@@ -33,6 +33,7 @@
 
         <activity android:name=".Statistics.ChartActivity" />
         <activity android:name=".calendarWork.CalendarActivity"></activity>
+        <activity android:name=".SettingActivity"></activity>
     </application>
 
 </manifest>
