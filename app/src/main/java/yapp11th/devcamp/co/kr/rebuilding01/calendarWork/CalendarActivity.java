@@ -32,6 +32,7 @@ public class CalendarActivity extends AppCompatActivity {
         caldroidFragment.setArguments(args);
 
 
+
         final CaldroidListener listener = new CaldroidListener() {
             @Override
             public void onSelectDate(Date date, View view) {
