@@ -1,4 +1,4 @@
-package yapp11th.devcamp.co.kr.rebuilding01;
+package yapp11th.devcamp.co.kr.rebuilding01.push;
 
 import retrofit2.Call;
 import retrofit2.http.Field;

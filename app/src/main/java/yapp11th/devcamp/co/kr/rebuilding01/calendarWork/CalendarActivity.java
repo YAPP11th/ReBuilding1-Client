@@ -1,4 +1,4 @@
-package yapp11th.devcamp.co.kr.rebuilding01;
+package yapp11th.devcamp.co.kr.rebuilding01.calendarWork;
 
 import android.icu.util.Calendar;
 import android.os.Bundle;
@@ -14,6 +14,8 @@ import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
 import java.util.Date;
+
+import yapp11th.devcamp.co.kr.rebuilding01.R;
 
 public class CalendarActivity extends AppCompatActivity {
 
