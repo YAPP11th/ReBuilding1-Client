@@ -3,6 +3,7 @@
     package="yapp11th.devcamp.co.kr.rebuilding01">
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -32,8 +33,9 @@
         </service>
 
         <activity android:name=".Statistics.ChartActivity" />
-        <activity android:name=".calendarWork.CalendarActivity"></activity>
-        <activity android:name=".SettingActivity"></activity>
+        <activity android:name=".calendarWork.CalendarActivity" />
+        <activity android:name=".SettingActivity" />
+        <activity android:name=".workTimeLine.TimeLineActivity"></activity>
     </application>
 
 </manifest>
