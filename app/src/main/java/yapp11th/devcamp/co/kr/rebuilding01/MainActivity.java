@@ -13,9 +13,9 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import yapp11th.devcamp.co.kr.rebuilding01.calendarWork.CalendarActivity;
 import yapp11th.devcamp.co.kr.rebuilding01.push.Example;
 import yapp11th.devcamp.co.kr.rebuilding01.push.NetworkHelper;
+import yapp11th.devcamp.co.kr.rebuilding01.workTimeLine.TimeLineActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), CalendarActivity.class));
+                startActivity(new Intent(getApplicationContext(), TimeLineActivity.class));
             }
         });
 
