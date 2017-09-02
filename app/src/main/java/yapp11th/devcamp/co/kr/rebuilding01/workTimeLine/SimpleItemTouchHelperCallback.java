@@ -7,8 +7,6 @@ import android.support.v7.widget.helper.ItemTouchHelper;
  * Created by ridickle on 2017. 8. 25..
  */
 
-// 사용 안함
-// 사유 : ViewHolder 단위로만 드래그 가능
 public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback{
     private OnItemMoveListener mItemMoveListener;
     int dragFrom = -1;
