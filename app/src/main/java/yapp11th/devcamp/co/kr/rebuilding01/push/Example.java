@@ -8,6 +8,7 @@ public class Example {
     String data1;
     String data2;
 
+
     private Example(String data1, String data2){
         this.data1 = data1;
         this.data2 = data2;
