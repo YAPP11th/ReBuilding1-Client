@@ -18,7 +18,6 @@ import yapp11th.devcamp.co.kr.rebuilding01.push.NetworkHelper;
 import yapp11th.devcamp.co.kr.rebuilding01.workTimeLine.TimeLineActivity;
 
 public class MainActivity extends AppCompatActivity {
-
     private static final String TAG = "MainActivity";
     Button calendar, setting;
 
@@ -64,5 +63,4 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
 }
