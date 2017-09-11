@@ -13,13 +13,14 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import yapp11th.devcamp.co.kr.rebuilding01.Statistics.ChartActivity;
 import yapp11th.devcamp.co.kr.rebuilding01.push.Example;
 import yapp11th.devcamp.co.kr.rebuilding01.push.NetworkHelper;
 import yapp11th.devcamp.co.kr.rebuilding01.workTimeLine.TimeLineActivity;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-    Button calendar, setting;
+    Button calendar, setting, chart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, SettingActivity.class));
+            }
+        });
+        chart = (Button) findViewById(R.id.chart);
+        chart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, ChartActivity.class));
             }
         });
     }
