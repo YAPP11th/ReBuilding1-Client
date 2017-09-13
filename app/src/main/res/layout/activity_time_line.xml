@@ -4,12 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="yapp11th.devcamp.co.kr.rebuilding01.workTimeLine.TimeLineActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:scrollbars="vertical"
+    <noman.weekcalendar.WeekCalendar
+        android:id="@+id/weekCalendar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="65dp"
+        android:background="@color/colorPrimary"
+        app:dayNameLength="threeLetters"
+        app:daysTextColor="@color/caldroid_black"
+        app:numOfPages="150"
+        app:todaysDateBgColor="#ffffff" />
+
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/caldroid_white"
+        android:scaleType="centerInside"
+        android:src="@mipmap/ic_launcher" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
+
+        <LinearLayout
+            android:id="@+id/directInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/directText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="할 일을 입력하세요" />
+
+            <ImageButton
+                android:id="@+id/directOK"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:id="@+id/directCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

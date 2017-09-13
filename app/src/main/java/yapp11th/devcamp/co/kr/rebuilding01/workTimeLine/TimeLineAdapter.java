@@ -82,9 +82,11 @@ class TimeLineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> impl
         } else {
             CenterHolder centerHolder = (CenterHolder) holder;
             ViewGroup.LayoutParams params = centerHolder.mLayout.getLayoutParams();
-            params.width = (int) TimeLineActivity.width / 10 * 1;
+            params.width = (int) TimeLineActivity.width / 9 * 1;
             params.height = (int) TimeLineActivity.height / 7;
             centerHolder.mLayout.setLayoutParams(params);
+
+            centerHolder.mLayout.requestLayout();
         }
     }
 
@@ -121,14 +123,21 @@ class TimeLineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> impl
         }
 
         ViewGroup.LayoutParams params = roleHolder.mLayout.getLayoutParams();
-        params.width = (int) TimeLineActivity.width / 10 * 4;
+        params.width = (int) TimeLineActivity.width / 9 * 4;
         params.height = (int) TimeLineActivity.height / 7;
         roleHolder.mLayout.setLayoutParams(params);
+
+        roleHolder.mLayout.requestLayout();
     }
 
     @Override
     public boolean onItemMove(RecyclerView.ViewHolder viewHolder, final int fromPosition, final int toPosition) {
-        if ((fromPosition < 0) || (fromPosition >= workList.length) || (toPosition < 0) || (toPosition >= workList.length) || ((fromPosition % 3) == 1) || ((toPosition % 3) == 1)) {
+        if ((fromPosition < 0) ||                       // fromPosition 이 1 아래거나
+                (fromPosition >= workList.length) ||    // fromPosition 이 최대길이보다 크거나
+                (toPosition < 0) ||                     // toPosition 이 1 아래거나
+                (toPosition >= workList.length) ||      // toPosition 이 최대길이보다 크거나
+                ((fromPosition % 3) == 1) ||            // fromPosition 이 센터 값이거나
+                ((toPosition % 3) == 1)) {              // toPosition 이 센터 값이거나
             return false;
         }
 

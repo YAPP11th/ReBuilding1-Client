@@ -5,41 +5,69 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.DisplayMetrics;
 import android.util.Log;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
+import org.joda.time.DateTime;
+
+import noman.weekcalendar.WeekCalendar;
+import noman.weekcalendar.listener.OnDateClickListener;
 import yapp11th.devcamp.co.kr.rebuilding01.R;
 
 public class TimeLineActivity extends AppCompatActivity {
     private static final String TAG = "TimeLineActivity";
+    public static final int ROLE = 0;
+    public static final int CENTER = 1;
+
     private RecyclerView mRecyclerView;
     private TimeLineAdapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-    public static double width, height, density;
+    private GridLayoutManager mLayoutManager;
+    private WeekCalendar mWeekCalendar;
+    private EditText mDirectText;
+    private ImageButton mDirectOK, mDirectCancel;
+    public static double width, height;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_line);
 
-        recycerViewSetting();
-        getDPSize();
+        mWeekCalendar = (WeekCalendar) findViewById(R.id.weekCalendar);
+
+        mWeekCalendar.setOnDateClickListener(new OnDateClickListener() {
+            @Override
+            public void onDateClick(DateTime dateTime) {
+
+            }
+        });
+
+        directInputSetting();
     }
 
     private void recycerViewSetting() {
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
+        mAdapter = new TimeLineAdapter(this, getDummyWorkList());
         mRecyclerView.setHasFixedSize(true);
 
         // use linear layout manager & specify an Adapter
-        mLayoutManager = new GridLayoutManager(this, 3);
+        mLayoutManager = new GridLayoutManager(this, 9);
+        mLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (position % 3 == CENTER)
+                    return 1;
+                else
+                    return 4;
+            }
+        });
+
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new TimeLineAdapter(this, getDummyWorkList());
 
         // setting Drag and drop event in RecyclerView
-        ItemTouchHelper.Callback callback =  new SimpleItemTouchHelperCallback(mAdapter);
+        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mAdapter);
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
         touchHelper.attachToRecyclerView(mRecyclerView);
 
@@ -49,13 +77,13 @@ public class TimeLineActivity extends AppCompatActivity {
     private Work[] getDummyWorkList() {
         Work[] workList = new Work[18];
 
-        for (int i = 0 ; i<18 ; i++){
+        for (int i = 0; i < 18; i++) {
             workList[i] = new Work.WorkBuilder()
                     .work("" + i)
                     .worker("")
                     .date("2017-08-24")
-                    .startTime(i/3)
-                    .endTime((i/3)+1)
+                    .startTime(i / 3)
+                    .endTime((i / 3) + 1)
                     .build();
         }
 
@@ -67,28 +95,28 @@ public class TimeLineActivity extends AppCompatActivity {
                     .startTime(i)
                     .endTime(i + 1)
                     .build();
-
         }
 
         return workList;
     }
 
-    public void getDPSize(){
-        DisplayMetrics metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
 
-        width = metrics.widthPixels;
-        height = metrics.heightPixels;
-        density = metrics.densityDpi;
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        LinearLayout lL = (LinearLayout) findViewById(R.id.directInput);
 
-        // px to dp
-        // ldpi : 1dp = 0.75px
-        // mdpi : 1dp = 1px
-        // hdpi : 1dp = 1.5px
-        // xdpi : 1dp = 2px;
-        Log.d (TAG, "widthPX : " + width + "\nheight : " + height + "\ndensity : " + density);
+        width = mRecyclerView.getWidth();
+        height = mRecyclerView.getHeight() - lL.getHeight();
 
-//        width = width * (160 / density);
-//        height = height * (160 / density);
+        Log.d(TAG, "width : " + width + "\nheight : " + height);
+        recycerViewSetting();
+    }
+
+    private void directInputSetting(){
+        mDirectText = (EditText) findViewById(R.id.directText);
+        mDirectOK = (ImageButton) findViewById(R.id.directOK);
+        mDirectCancel = (ImageButton) findViewById(R.id.directCancel);
     }
 }
