@@ -1,4 +1,4 @@
-package yapp11th.devcamp.co.kr.rebuilding01;
+package yapp11th.devcamp.co.kr.rebuilding01.push;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -13,6 +13,9 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.Map;
+
+import yapp11th.devcamp.co.kr.rebuilding01.MainActivity;
+import yapp11th.devcamp.co.kr.rebuilding01.R;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 

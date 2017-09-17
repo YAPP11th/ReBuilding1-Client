@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="?styleCaldroidViewLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="23.3dp"
+            android:layout_marginTop="27dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/calendar_year_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2016년"
+                android:textColor="@color/calendar_TextColor"
+                android:textSize="15.3sp" />
+
+            <TextView
+                android:id="@+id/calendar_month_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="8월"
+                android:textColor="@color/calendar_TextColor"
+                android:textSize="36.3sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="35.3dp"
+            android:background="@drawable/group_3" />
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/weekday_gridview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:numColumns="7"
+        android:stretchMode="columnWidth">
+
+    </GridView>
+
+    <com.antonyt.infiniteviewpager.InfiniteViewPager
+        android:id="@+id/months_infinite_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

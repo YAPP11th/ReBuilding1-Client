@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="44.7dp"
+    android:layout_height="74.7dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:text="1"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/second"
+        android:layout_width="match_parent"
+        android:layout_height="7.7dp"
+        android:layout_marginBottom="1.3dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/calendar_womanColor"
+        android:gravity="center"
+        android:text="가나다라마바"
+        android:textSize="7sp" />
+
+    <TextView
+        android:id="@+id/first"
+        android:layout_width="match_parent"
+        android:layout_height="7.7dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="1.3dp"
+        android:background="@color/calendar_manColor"
+        android:gravity="center"
+        android:text="가나다라마바"
+        android:textSize="7sp" />
+
+</LinearLayout>
