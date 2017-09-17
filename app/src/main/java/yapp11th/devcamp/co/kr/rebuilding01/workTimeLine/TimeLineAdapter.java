@@ -17,11 +17,13 @@ import yapp11th.devcamp.co.kr.rebuilding01.R;
 class TimeLineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements OnItemMoveListener {
     private Work[] workList;
     private Context context;
+    private int flag;
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public TimeLineAdapter(Context context, Work[] workList) {
+    public TimeLineAdapter(Context context, Work[] workList, int flag) {
         this.context = context;
         this.workList = workList;
+        this.flag = flag;
     }
 
     public static class RoleHolder extends RecyclerView.ViewHolder {
@@ -46,9 +48,10 @@ class TimeLineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> impl
 
     // Create new views (invoked by the layout manager)
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
         // create a new view
         View convertView;
+
         if (viewType == 0 || viewType == 2) {
             convertView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.timeline_item, parent, false);
@@ -60,8 +63,8 @@ class TimeLineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> impl
 
             return new CenterHolder(convertView);
         }
-        // set the view's size, margins, paddings and layout parameters
 
+        // set the view's size, margins, paddings and layout parameters
     }
 
     @Override
@@ -78,7 +81,6 @@ class TimeLineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> impl
             Work item = workList[position];
 
             textViewSetting(holder, item, position);
-
         } else {
             CenterHolder centerHolder = (CenterHolder) holder;
             ViewGroup.LayoutParams params = centerHolder.mLayout.getLayoutParams();
@@ -96,7 +98,7 @@ class TimeLineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> impl
     }
 
     private void textViewSetting(RecyclerView.ViewHolder holder, Work item, final int position) {
-        RoleHolder roleHolder = (RoleHolder) holder;
+        final RoleHolder roleHolder = (RoleHolder) holder;
         DragableTextView textView = roleHolder.mTextView;
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,7 +118,7 @@ class TimeLineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> impl
         }
         textView.setTime(position / 3);
 
-        if (item != null) {
+        if (item != null && flag == 0) {
             textView.setText(item.getWork());
         } else {
             textView.setText("");
