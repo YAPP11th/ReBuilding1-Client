@@ -24,8 +24,6 @@ import noman.weekcalendar.listener.OnDateClickListener;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import yapp11th.devcamp.co.kr.rebuilding01.KaKao.KakaoLoginActivity;
-import yapp11th.devcamp.co.kr.rebuilding01.Setting.SettingActivity;
 import yapp11th.devcamp.co.kr.rebuilding01.Statistics.ChartActivity;
 import yapp11th.devcamp.co.kr.rebuilding01.calendarWork.CalendarActivity;
 import yapp11th.devcamp.co.kr.rebuilding01.push.Example;
@@ -136,8 +134,11 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         FragmentManager fm = getFragmentManager();
         fragmentTransaction = fm.beginTransaction();
         fragmentFrame = MainFragment1.newInstance();
-        fragmentTransaction.add(R.id.mainFragment, fragmentFrame);
-        fragmentTransaction.commit();
+        if(flag == 0) {     // 임시 땜빵
+            fragmentTransaction.add(R.id.mainFragment, fragmentFrame);
+            fragmentTransaction.commit();
+        }
+        flag = 1;
     }
 
     @Override
