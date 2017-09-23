@@ -31,6 +31,7 @@ import yapp11th.devcamp.co.kr.rebuilding01.push.NetworkHelper;
 
 public class MainActivity extends AppCompatActivity implements MainPresenter.View {
     private static final String TAG = "MainActivity";
+    Button calendar, setting, chart;
 
     public static final int ROLE = 0;
     public static final int CENTER = 1;
@@ -42,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     public static ImageButton timeLineButton;
     private FragmentTransaction fragmentTransaction;
     private Fragment fragmentFrame;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,6 +160,5 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     @Override
     public void dateClick(String str) {
         Toast.makeText(getApplicationContext(), str, Toast.LENGTH_SHORT).show();
-
     }
 }
