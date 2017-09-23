@@ -1,5 +1,6 @@
-package yapp11th.devcamp.co.kr.rebuilding01;
+package yapp11th.devcamp.co.kr.rebuilding01.Setting;
 
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -7,6 +8,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
+
+import yapp11th.devcamp.co.kr.rebuilding01.R;
 
 public class SettingActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
 
@@ -39,16 +42,50 @@ public class SettingActivity extends AppCompatActivity implements CompoundButton
         cb5.setOnCheckedChangeListener(this);
         cb6.setOnCheckedChangeListener(this);
 
+        //SharedPreferences
+        //특정 이름을 가진 SharedPreferences 생성
+        SharedPreferences sf = getSharedPreferences("sfSetting", MODE_PRIVATE);
+
+        //저장해놨던 사용자 입력값을 꺼내서 반영
+        allSwitch.setChecked(sf.getBoolean("allSwitch", true));
+        cb1.setChecked(sf.getBoolean("cb1", true));
+        cb2.setChecked(sf.getBoolean("cb2", true));
+        cb3.setChecked(sf.getBoolean("cb3", true));
+        cb4.setChecked(sf.getBoolean("cb4", true));
+        cb5.setChecked(sf.getBoolean("cb5", true));
+        cb6.setChecked(sf.getBoolean("cb6", true));
+
         //처음에 switch 상태 확인함
         if(allSwitch.isChecked()) //처음 switch 상태에 따라 체크박스 활성화 or 비활성화시켜둠
-            switchChecked();
+            switchChecked(); //활성화
         else
-            switchUnchecked();
+            switchUnchecked(); //비활성화
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        //SharedPreferences
+        SharedPreferences sf = getSharedPreferences("sfSetting", MODE_PRIVATE);
+
+        //Activity가 종료되기 전에 저장한다.
+        //SharedPreferences에 기억하고 싶은 값 저장하기
+        SharedPreferences.Editor editor = sf.edit();//저장하려면 editor가 필요함
+        editor.putBoolean("allSwitch", allSwitch.isChecked()); //입력한 값 저장
+        editor.putBoolean("cb1",cb1.isChecked());
+        editor.putBoolean("cb2",cb2.isChecked());
+        editor.putBoolean("cb3",cb3.isChecked());
+        editor.putBoolean("cb4",cb4.isChecked());
+        editor.putBoolean("cb5",cb5.isChecked());
+        editor.putBoolean("cb6",cb6.isChecked());
+        editor.commit(); //파일에 최종 반영
+
+    }
+
+    //전체 체크박스 활성화
     public void switchChecked()
     {
-        //전체 체크박스 활성화
         cb1.setEnabled(true);
         cb2.setEnabled(true);
         cb3.setEnabled(true);
@@ -57,9 +94,9 @@ public class SettingActivity extends AppCompatActivity implements CompoundButton
         cb6.setEnabled(true);
     }
 
+    //전체 체크박스 비활성화
     public void switchUnchecked()
     {
-        //전체 체크박스 비활성화
         cb1.setEnabled(false);
         cb2.setEnabled(false);
         cb3.setEnabled(false);
@@ -81,7 +118,7 @@ public class SettingActivity extends AppCompatActivity implements CompoundButton
 
                     //체크 되어있는 체크박스 기능 on
                     if(cb1.isChecked())
-                        Toast.makeText(getApplicationContext(), cb1.getText() + " 체크", Toast.LENGTH_SHORT).show();
+                       Toast.makeText(getApplicationContext(), cb1.getText() + " 체크", Toast.LENGTH_SHORT).show();
                     if(cb2.isChecked())
                         Toast.makeText(getApplicationContext(), cb2.getText() + " 체크", Toast.LENGTH_SHORT).show();
                     if(cb3.isChecked())
@@ -104,45 +141,57 @@ public class SettingActivity extends AppCompatActivity implements CompoundButton
                 break;
 
             case R.id.checkBox1:
-                if(cb1.isChecked())
-                    Toast.makeText(getApplicationContext(), cb1.getText() + " 체크", Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(getApplicationContext(), cb1.getText() + " 체크 해제", Toast.LENGTH_SHORT).show();
+                if(allSwitch.isChecked()) {
+                    if (cb1.isChecked())
+                        Toast.makeText(getApplicationContext(), cb1.getText() + " 체크", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(getApplicationContext(), cb1.getText() + " 체크 해제", Toast.LENGTH_SHORT).show();
+                }
                 break;
 
             case R.id.checkBox2:
-                if(cb2.isChecked())
-                    Toast.makeText(getApplicationContext(), cb2.getText() + " 체크", Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(getApplicationContext(), cb2.getText() + " 체크 해제", Toast.LENGTH_SHORT).show();
+                if(allSwitch.isChecked()) {
+                    if (cb2.isChecked())
+                        Toast.makeText(getApplicationContext(), cb2.getText() + " 체크", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(getApplicationContext(), cb2.getText() + " 체크 해제", Toast.LENGTH_SHORT).show();
+                }
                 break;
 
             case R.id.checkBox3:
-                if(cb3.isChecked())
-                    Toast.makeText(getApplicationContext(), cb3.getText() + " 체크", Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(getApplicationContext(), cb3.getText() + " 체크 해제", Toast.LENGTH_SHORT).show();
+                if(allSwitch.isChecked()) {
+                    if (cb3.isChecked())
+                        Toast.makeText(getApplicationContext(), cb3.getText() + " 체크", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(getApplicationContext(), cb3.getText() + " 체크 해제", Toast.LENGTH_SHORT).show();
+                }
                 break;
 
             case R.id.checkBox4:
-                if(cb4.isChecked())
-                    Toast.makeText(getApplicationContext(), cb4.getText() + " 체크", Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(getApplicationContext(), cb4.getText() + " 체크 해제", Toast.LENGTH_SHORT).show();
+                if(allSwitch.isChecked()) {
+                    if (cb4.isChecked())
+                        Toast.makeText(getApplicationContext(), cb4.getText() + " 체크", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(getApplicationContext(), cb4.getText() + " 체크 해제", Toast.LENGTH_SHORT).show();
+                }
                 break;
 
             case R.id.checkBox5:
-                if(cb5.isChecked())
-                    Toast.makeText(getApplicationContext(), cb5.getText() + " 체크", Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(getApplicationContext(), cb5.getText() + " 체크 해제", Toast.LENGTH_SHORT).show();
+                if(allSwitch.isChecked()) {
+                    if (cb5.isChecked())
+                        Toast.makeText(getApplicationContext(), cb5.getText() + " 체크", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(getApplicationContext(), cb5.getText() + " 체크 해제", Toast.LENGTH_SHORT).show();
+                }
                 break;
 
             case R.id.checkBox6:
-                if(cb6.isChecked())
-                    Toast.makeText(getApplicationContext(), cb6.getText() + " 체크", Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(getApplicationContext(), cb6.getText() + " 체크 해제", Toast.LENGTH_SHORT).show();
+                if(allSwitch.isChecked()) {
+                    if (cb6.isChecked())
+                        Toast.makeText(getApplicationContext(), cb6.getText() + " 체크", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(getApplicationContext(), cb6.getText() + " 체크 해제", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
 

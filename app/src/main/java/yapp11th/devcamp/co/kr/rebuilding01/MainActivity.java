@@ -13,13 +13,15 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import yapp11th.devcamp.co.kr.rebuilding01.KaKao.KakaoLoginActivity;
+import yapp11th.devcamp.co.kr.rebuilding01.Setting.SettingActivity;
 import yapp11th.devcamp.co.kr.rebuilding01.push.Example;
 import yapp11th.devcamp.co.kr.rebuilding01.push.NetworkHelper;
 import yapp11th.devcamp.co.kr.rebuilding01.workTimeLine.TimeLineActivity;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-    Button calendar, setting;
+    Button calendar, setting, kakaoLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
 
     void uiSetting() {
@@ -62,5 +66,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, SettingActivity.class));
             }
         });
+
+        kakaoLogin = (Button) findViewById(R.id.kakaoLogin);
+        kakaoLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, KakaoLoginActivity.class));
+            }
+        });
+
     }
 }
