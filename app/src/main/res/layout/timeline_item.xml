@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <yapp11th.devcamp.co.kr.rebuilding01.workTimeLine.DragableTextView
+    <yapp11th.devcamp.co.kr.rebuilding01.DragableTextView
         android:id="@+id/item_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -10,9 +10,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import yapp11th.devcamp.co.kr.rebuilding01.workTimeLine.DragableTextView;
-import yapp11th.devcamp.co.kr.rebuilding01.workTimeLine.Work;
-
 /**
  * Created by ridickle on 2017. 9. 23..
  */
@@ -20,12 +17,10 @@ import yapp11th.devcamp.co.kr.rebuilding01.workTimeLine.Work;
 class MainTimeLineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements AdapterModel {
     private ArrayList<Work> workList;
     private Context context;
-    private int flag;
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MainTimeLineAdapter(Context context, int flag) {
+    public MainTimeLineAdapter(Context context) {
         this.context = context;
-        this.flag = flag;
         this.workList = new ArrayList<>();
     }
 
@@ -46,7 +41,7 @@ class MainTimeLineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public void clear() {
-        workList.clear();
+        workList = new ArrayList<>();
     }
 
     @Override
@@ -145,7 +140,7 @@ class MainTimeLineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
         textView.setTime(position / 3);
 
-        if (item != null && flag == 0) {
+        if (item != null) {
             textView.setText(item.getWork());
         } else {
             textView.setText("");

@@ -1,30 +1,55 @@
 package yapp11th.devcamp.co.kr.rebuilding01;
 
-import android.app.Activity;
+import org.joda.time.DateTime;
 
 import java.util.ArrayList;
-
-import yapp11th.devcamp.co.kr.rebuilding01.workTimeLine.Work;
 
 /**
  * Created by ridickle on 2017. 9. 23..
  */
 
 public class MainPresenterImpl implements MainPresenter, MainModel{
-    private Activity activity;
+    private static MainPresenterImpl instance = null;
     private MainPresenter.View view;
+    private MainPresenter.Fragment fragment;
 
-    // 1. 뷰 설정
-    public MainPresenterImpl(MainPresenter.View view) {
-        this.view = view;
+    public MainPresenterImpl() {
     }
+
+    // 1. view 설정
+    public static synchronized MainPresenterImpl newInstance(MainPresenter.View view){
+        if(instance == null) {
+            instance = new MainPresenterImpl();
+        }
+
+        instance.view = view;
+
+        return instance;
+    }
+
+    // 1-2. fragment 설정
+    public static synchronized MainPresenterImpl newInstance(MainPresenter.Fragment fragment){
+        if(instance == null) {
+            instance = new MainPresenterImpl();
+        }
+
+        instance.fragment = fragment;
+
+        return instance;
+    }
+
 
     @Override
     public void initData() {
 //        List<Work> datas = new ArrayList<>();
 //        datas.add();
 //        datas.add();
-        view.addDatas(getDummyWorkList());
+        instance.fragment.addDatas(getDummyWorkList());
+    }
+
+    @Override
+    public void dateClickEvent(DateTime dateTime) {
+        instance.view.dateClick(dateTime.toString());
     }
 
     @Override

@@ -1,4 +1,4 @@
-package yapp11th.devcamp.co.kr.rebuilding01.workTimeLine;
+package yapp11th.devcamp.co.kr.rebuilding01;
 
 import java.util.ArrayList;
 import java.util.List;
