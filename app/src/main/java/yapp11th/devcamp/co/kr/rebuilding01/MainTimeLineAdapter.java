@@ -1,4 +1,4 @@
-package yapp11th.devcamp.co.kr.rebuilding01.workTimeLine;
+package yapp11th.devcamp.co.kr.rebuilding01;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -10,22 +10,48 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import yapp11th.devcamp.co.kr.rebuilding01.R;
+import yapp11th.devcamp.co.kr.rebuilding01.workTimeLine.DragableTextView;
+import yapp11th.devcamp.co.kr.rebuilding01.workTimeLine.Work;
 
 /**
- * Created by ridickle on 2017. 8. 24..
+ * Created by ridickle on 2017. 9. 23..
  */
 
-class TimeLineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements OnItemMoveListener {
+class MainTimeLineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements AdapterModel {
     private ArrayList<Work> workList;
     private Context context;
     private int flag;
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public TimeLineAdapter(Context context, int flag) {
+    public MainTimeLineAdapter(Context context, int flag) {
         this.context = context;
         this.flag = flag;
-        this.workList = getDummyWorkList();
+        this.workList = new ArrayList<>();
+    }
+
+    @Override
+    public void add(Work work) {
+        workList.add(work);
+    }
+
+    @Override
+    public Work remove(int position) {
+        return workList.remove(position);
+    }
+
+    @Override
+    public Work getWork(int position) {
+        return workList.get(position);
+    }
+
+    @Override
+    public void clear() {
+        workList.clear();
+    }
+
+    @Override
+    public void refresh() {
+        notifyDataSetChanged();
     }
 
     public static class RoleHolder extends RecyclerView.ViewHolder {
@@ -81,13 +107,12 @@ class TimeLineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> impl
 
         if (holder.getItemViewType() == 0 || holder.getItemViewType() == 2) {
             Work item = workList.get(position);
-
             textViewSetting(holder, item, position);
         } else {
             CenterHolder centerHolder = (CenterHolder) holder;
             ViewGroup.LayoutParams params = centerHolder.mLayout.getLayoutParams();
-            params.width = (int) TimeLineActivity.width / 9 * 1;
-            params.height = (int) TimeLineActivity.height / 7;
+            params.width = (int) MainActivity.width / 9 * 1;
+            params.height = (int) MainActivity.height / 7;
             centerHolder.mLayout.setLayoutParams(params);
 
             centerHolder.mLayout.requestLayout();
@@ -99,17 +124,17 @@ class TimeLineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> impl
         return workList.size();
     }
 
-    private void textViewSetting(RecyclerView.ViewHolder holder, Work item, final int position) {
+    private void textViewSetting(RecyclerView.ViewHolder holder, final Work item, final int position) {
         final RoleHolder roleHolder = (RoleHolder) holder;
         DragableTextView textView = roleHolder.mTextView;
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "일 이름 : " + workList.get(position).getWork() + "\n"
-                        + "일 책임자 : " + workList.get(position).getWorker() + "\n"
-                        + "날짜 : " + workList.get(position).getDate() + "\n"
-                        + "시작 시간 : " + workList.get(position).getStartTime() + ":00\n"
-                        + "끝 시간 : " + workList.get(position).getEndTime() + ":00", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "일 이름 : " + item.getWork() + "\n"
+                        + "일 책임자 : " + item.getWorker() + "\n"
+                        + "날짜 : " + item.getDate() + "\n"
+                        + "시작 시간 : " + item.getStartTime() + ":00\n"
+                        + "끝 시간 : " + item.getEndTime() + ":00", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -127,80 +152,10 @@ class TimeLineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> impl
         }
 
         ViewGroup.LayoutParams params = roleHolder.mLayout.getLayoutParams();
-        params.width = (int) TimeLineActivity.width / 9 * 4;
-        params.height = (int) TimeLineActivity.height / 7;
+        params.width = (int) MainActivity.width / 9 * 4;
+        params.height = (int) MainActivity.height / 7;
         roleHolder.mLayout.setLayoutParams(params);
 
         roleHolder.mLayout.requestLayout();
     }
-
-    @Override
-    public boolean onItemMove(RecyclerView.ViewHolder viewHolder, final int fromPosition, final int toPosition) {
-        if ((fromPosition < 0) ||                       // fromPosition 이 1 아래거나
-                (fromPosition >= workList.size()) ||    // fromPosition 이 최대길이보다 크거나
-                (toPosition < 0) ||                     // toPosition 이 1 아래거나
-                (toPosition >= workList.size()) ||      // toPosition 이 최대길이보다 크거나
-                ((fromPosition % 3) == 1) ||            // fromPosition 이 센터 값이거나
-                ((toPosition % 3) == 1)) {              // toPosition 이 센터 값이거나
-            return false;
-        }
-
-        swapWork(fromPosition, toPosition);
-
-        notifyItemMoved(fromPosition, toPosition);
-        return true;
-    }
-
-    private void swapWork(int fromPosition, int toPosition) {
-        Work temp = workList.get(fromPosition);
-
-        workList.set(fromPosition, workList.get(toPosition));
-        workList.set(fromPosition,  SpecifySetting(fromPosition));
-
-        workList.set(toPosition, temp);
-        workList.set(toPosition, SpecifySetting(toPosition));
-    }
-
-    private Work SpecifySetting(int position) {
-        workList.get(position).setStartTime(position / 3);
-        workList.get(position).setEndTime(position / 3 + 1);
-        workList.get(position).setWorker(position % 3 == 0 ? "남편" : "아내");
-
-        return workList.get(position);
-    }
-
-    @Override
-    public void onItemDismiss(int position) {
-        notifyDataSetChanged();
-    }
-
-    private ArrayList<Work> getDummyWorkList() {
-        ArrayList<Work> workList = new ArrayList<>();
-
-        for (int i = 0; i < 18; i++) {
-            String work = "";
-            String worker = "";
-
-            if(i%3 == 0){
-                work = "설거지하기";
-                worker = "남편";
-            }
-
-            else if(i%3 == 2){
-                work = "설거지하기";
-                worker = "아내";
-            }
-
-            workList.add(new Work.WorkBuilder()
-                    .work(work + i)
-                    .worker(worker)
-                    .date("2017-08-24")
-                    .startTime(i / 3)
-                    .endTime((i / 3) + 1)
-                    .build());
-        }
-
-        return workList;
-    }
-
 }

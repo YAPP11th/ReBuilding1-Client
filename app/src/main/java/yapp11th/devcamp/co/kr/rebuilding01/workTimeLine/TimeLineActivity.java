@@ -13,15 +13,18 @@ import android.widget.LinearLayout;
 
 import org.joda.time.DateTime;
 
+import java.util.List;
+
 import noman.weekcalendar.WeekCalendar;
 import noman.weekcalendar.listener.OnDateClickListener;
 import yapp11th.devcamp.co.kr.rebuilding01.R;
 
-public class TimeLineActivity extends AppCompatActivity {
+public class TimeLineActivity extends AppCompatActivity implements WorkTimeLinePresenter.View{
     private static final String TAG = "TimeLineActivity";
     public static final int ROLE = 0;
     public static final int CENTER = 1;
     int flag = 0;
+    WorkTimeLinePresenter mPresenter;
 
     private RecyclerView mRecyclerView;
     private TimeLineAdapter mAdapter;
@@ -64,7 +67,7 @@ public class TimeLineActivity extends AppCompatActivity {
     private void recycerViewSetting(int flag) {
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
-        mAdapter = new TimeLineAdapter(this, getDummyWorkList(), flag);
+        mAdapter = new TimeLineAdapter(this, flag);
         mRecyclerView.setHasFixedSize(true);
 
         // use linear layout manager & specify an Adapter
@@ -89,32 +92,6 @@ public class TimeLineActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    private Work[] getDummyWorkList() {
-        Work[] workList = new Work[18];
-
-        for (int i = 0; i < 18; i++) {
-            workList[i] = new Work.WorkBuilder()
-                    .work("" + i)
-                    .worker("")
-                    .date("2017-08-24")
-                    .startTime(i / 3)
-                    .endTime((i / 3) + 1)
-                    .build();
-        }
-
-        for (int i = 0; i < 6; i++) {
-            workList[3 * i + (i % 2 == 0 ? 0 : 2)] = new Work.WorkBuilder()
-                    .work("설거지하기" + i)
-                    .worker(i % 2 == 0 ? "남편" : "아내")
-                    .date("2017-08-24")
-                    .startTime(i)
-                    .endTime(i + 1)
-                    .build();
-        }
-
-        return workList;
-    }
-
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
@@ -134,5 +111,10 @@ public class TimeLineActivity extends AppCompatActivity {
         mDirectText = (EditText) findViewById(R.id.directText);
         mDirectOK = (ImageButton) findViewById(R.id.directOK);
         mDirectCancel = (ImageButton) findViewById(R.id.directCancel);
+    }
+
+    @Override
+    public void addDatas(List<Work> datas) {
+
     }
 }
