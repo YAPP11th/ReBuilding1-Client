@@ -7,6 +7,15 @@
     android:orientation="vertical"
     tools:context="yapp11th.devcamp.co.kr.rebuilding01.calendarWork.CalendarActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
     <FrameLayout
         android:id="@+id/calendar"
         android:layout_width="match_parent"

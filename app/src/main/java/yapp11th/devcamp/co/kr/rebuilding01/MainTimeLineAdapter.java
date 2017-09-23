@@ -1,4 +1,4 @@
-package yapp11th.devcamp.co.kr.rebuilding01.workTimeLine;
+package yapp11th.devcamp.co.kr.rebuilding01;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,20 +8,45 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import yapp11th.devcamp.co.kr.rebuilding01.R;
+import java.util.ArrayList;
 
 /**
- * Created by ridickle on 2017. 8. 24..
+ * Created by ridickle on 2017. 9. 23..
  */
 
-class TimeLineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements OnItemMoveListener {
-    private Work[] workList;
+class MainTimeLineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements AdapterModel {
+    private ArrayList<Work> workList;
     private Context context;
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public TimeLineAdapter(Context context, Work[] workList) {
+    public MainTimeLineAdapter(Context context) {
         this.context = context;
-        this.workList = workList;
+        this.workList = new ArrayList<>();
+    }
+
+    @Override
+    public void add(Work work) {
+        workList.add(work);
+    }
+
+    @Override
+    public Work remove(int position) {
+        return workList.remove(position);
+    }
+
+    @Override
+    public Work getWork(int position) {
+        return workList.get(position);
+    }
+
+    @Override
+    public void clear() {
+        workList = new ArrayList<>();
+    }
+
+    @Override
+    public void refresh() {
+        notifyDataSetChanged();
     }
 
     public static class RoleHolder extends RecyclerView.ViewHolder {
@@ -46,9 +71,10 @@ class TimeLineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> impl
 
     // Create new views (invoked by the layout manager)
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
         // create a new view
         View convertView;
+
         if (viewType == 0 || viewType == 2) {
             convertView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.timeline_item, parent, false);
@@ -60,8 +86,8 @@ class TimeLineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> impl
 
             return new CenterHolder(convertView);
         }
-        // set the view's size, margins, paddings and layout parameters
 
+        // set the view's size, margins, paddings and layout parameters
     }
 
     @Override
@@ -75,35 +101,35 @@ class TimeLineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> impl
         // - replace the contents of the view with that element
 
         if (holder.getItemViewType() == 0 || holder.getItemViewType() == 2) {
-            Work item = workList[position];
-
+            Work item = workList.get(position);
             textViewSetting(holder, item, position);
-
         } else {
             CenterHolder centerHolder = (CenterHolder) holder;
             ViewGroup.LayoutParams params = centerHolder.mLayout.getLayoutParams();
-            params.width = (int) TimeLineActivity.width / 10 * 1;
-            params.height = (int) TimeLineActivity.height / 7;
+            params.width = (int) MainActivity.width / 9 * 1;
+            params.height = (int) MainActivity.height / 7;
             centerHolder.mLayout.setLayoutParams(params);
+
+            centerHolder.mLayout.requestLayout();
         }
     }
 
     @Override
     public int getItemCount() {
-        return workList.length;
+        return workList.size();
     }
 
-    private void textViewSetting(RecyclerView.ViewHolder holder, Work item, final int position) {
-        RoleHolder roleHolder = (RoleHolder) holder;
+    private void textViewSetting(RecyclerView.ViewHolder holder, final Work item, final int position) {
+        final RoleHolder roleHolder = (RoleHolder) holder;
         DragableTextView textView = roleHolder.mTextView;
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "일 이름 : " + workList[position].getWork() + "\n"
-                        + "일 책임자 : " + workList[position].getWorker() + "\n"
-                        + "날짜 : " + workList[position].getDate() + "\n"
-                        + "시작 시간 : " + workList[position].getStartTime() + ":00\n"
-                        + "끝 시간 : " + workList[position].getEndTime() + ":00", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "일 이름 : " + item.getWork() + "\n"
+                        + "일 책임자 : " + item.getWorker() + "\n"
+                        + "날짜 : " + item.getDate() + "\n"
+                        + "시작 시간 : " + item.getStartTime() + ":00\n"
+                        + "끝 시간 : " + item.getEndTime() + ":00", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -121,43 +147,10 @@ class TimeLineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> impl
         }
 
         ViewGroup.LayoutParams params = roleHolder.mLayout.getLayoutParams();
-        params.width = (int) TimeLineActivity.width / 10 * 4;
-        params.height = (int) TimeLineActivity.height / 7;
+        params.width = (int) MainActivity.width / 9 * 4;
+        params.height = (int) MainActivity.height / 7;
         roleHolder.mLayout.setLayoutParams(params);
-    }
 
-    @Override
-    public boolean onItemMove(RecyclerView.ViewHolder viewHolder, final int fromPosition, final int toPosition) {
-        if ((fromPosition < 0) || (fromPosition >= workList.length) || (toPosition < 0) || (toPosition >= workList.length) || ((fromPosition % 3) == 1) || ((toPosition % 3) == 1)) {
-            return false;
-        }
-
-        swapWork(fromPosition, toPosition);
-
-        notifyItemMoved(fromPosition, toPosition);
-        return true;
-    }
-
-    private void swapWork(int fromPosition, int toPosition) {
-        Work temp = workList[fromPosition];
-
-        workList[fromPosition] = workList[toPosition];
-        workList[fromPosition] = SpecifySetting(fromPosition);
-
-        workList[toPosition] = temp;
-        workList[toPosition] = SpecifySetting(toPosition);
-    }
-
-    private Work SpecifySetting(int position) {
-        workList[position].setStartTime(position / 3);
-        workList[position].setEndTime(position / 3 + 1);
-        workList[position].setWorker(position % 3 == 0 ? "남편" : "아내");
-
-        return workList[position];
-    }
-
-    @Override
-    public void onItemDismiss(int position) {
-        notifyDataSetChanged();
+        roleHolder.mLayout.requestLayout();
     }
 }

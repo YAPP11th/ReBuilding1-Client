@@ -1,6 +1,7 @@
 package yapp11th.devcamp.co.kr.rebuilding01.push;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
@@ -14,4 +15,8 @@ public interface NetworkInterface {
 
     @POST("/users/pushExample")
     Call<Example> usersPushExample(@Field("data1") String data1, @Field("data2") String data2);
+
+
+    @POST("/users/abcd")
+    Call<Example> usersAbcd(@Body Example example);
 }

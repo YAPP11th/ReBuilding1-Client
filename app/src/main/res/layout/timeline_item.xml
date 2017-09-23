@@ -6,15 +6,26 @@
     android:background="?android:attr/selectableItemBackground"
     android:clickable="true"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="horizontal">
     <!-- views at the left of the blue line -->
 
-    <yapp11th.devcamp.co.kr.rebuilding01.workTimeLine.DragableTextView
+    <CheckBox
+        android:id="@+id/item_checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <yapp11th.devcamp.co.kr.rebuilding01.DragableTextView
         android:id="@+id/item_text"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
     <!-- other views -->
+
+    <ImageButton
+        android:id="@+id/item_delete"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@mipmap/ic_launcher" />
 
 </LinearLayout>
