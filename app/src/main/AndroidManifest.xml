@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="yapp11th.devcamp.co.kr.rebuilding01">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -12,6 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:replace="theme, icon, label">
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,6 +22,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--com.kakao.sdk.AppKey 이름으로 앱키를 등록-->
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_app_key" />
 
         <!-- 백그라운드에서 앱의 알림을 수신하는 것 외에 다른 방식으로 메시지를 처리하려는 경우에 필요 -->
         <service android:name=".push.MyFirebaseMessagingService">
@@ -36,8 +44,11 @@
 
         <activity android:name=".Statistics.ChartActivity" />
         <activity android:name=".calendarWork.CalendarActivity" />
-        <activity android:name=".SettingActivity" />
-        <activity android:name=".workTimeLine.TimeLineActivity"></activity>
+        <activity android:name=".Setting.SettingActivity" />
+        <activity android:name=".workTimeLine.TimeLineActivity" />
+        <activity android:name=".KaKao.KakaoLoginActivity"></activity>
+
+
     </application>
 
 </manifest>

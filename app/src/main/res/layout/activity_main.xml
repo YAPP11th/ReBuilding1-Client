@@ -16,7 +16,6 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-
     <noman.weekcalendar.WeekCalendar
         android:id="@+id/mainWeekCalendar"
         android:layout_width="match_parent"

@@ -24,6 +24,8 @@ import noman.weekcalendar.listener.OnDateClickListener;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import yapp11th.devcamp.co.kr.rebuilding01.KaKao.KakaoLoginActivity;
+import yapp11th.devcamp.co.kr.rebuilding01.Setting.SettingActivity;
 import yapp11th.devcamp.co.kr.rebuilding01.Statistics.ChartActivity;
 import yapp11th.devcamp.co.kr.rebuilding01.calendarWork.CalendarActivity;
 import yapp11th.devcamp.co.kr.rebuilding01.push.Example;
@@ -31,7 +33,6 @@ import yapp11th.devcamp.co.kr.rebuilding01.push.NetworkHelper;
 
 public class MainActivity extends AppCompatActivity implements MainPresenter.View {
     private static final String TAG = "MainActivity";
-    Button calendar, setting, chart;
 
     public static final int ROLE = 0;
     public static final int CENTER = 1;
@@ -116,6 +117,8 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
 
             }
         });
+
+
     }
 
     // 해상도에 맞춰 recyclerView 설정
