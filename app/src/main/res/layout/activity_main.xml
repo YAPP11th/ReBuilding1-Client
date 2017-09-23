@@ -7,30 +7,37 @@
     android:orientation="vertical"
     tools:context="yapp11th.devcamp.co.kr.rebuilding01.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-    <Button
-        android:id="@+id/calendar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="calendar" />
 
-    <Button
-        android:id="@+id/setting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="setting" />
+    <noman.weekcalendar.WeekCalendar
+        android:id="@+id/mainWeekCalendar"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="@color/colorPrimary"
+        app:dayNameLength="threeLetters"
+        app:daysTextColor="@color/caldroid_black"
+        app:numOfPages="150"
+        app:todaysDateBgColor="#ffffff" />
 
-    <Button
-        android:id="@+id/chart"
-        android:layout_width="wrap_content"
+    <ImageButton
+        android:id="@+id/mainTimeLineButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="chart" />
+        android:background="@color/caldroid_white"
+        android:scaleType="centerInside"
+        android:src="@mipmap/ic_launcher" />
+
+    <FrameLayout
+        android:id="@+id/mainFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
 </LinearLayout>

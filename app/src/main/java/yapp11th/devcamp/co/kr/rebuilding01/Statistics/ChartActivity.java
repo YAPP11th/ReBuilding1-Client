@@ -7,10 +7,13 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 
 import yapp11th.devcamp.co.kr.rebuilding01.R;
 
 public class ChartActivity extends AppCompatActivity {
+
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +22,7 @@ public class ChartActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tl_tabs);
         ViewPager viewPager = (ViewPager) findViewById(R.id.vp_pager);
+        uiSetting();
 
         Fragment arrFragments[] = new Fragment[2];
         arrFragments[0] = new ChartFragment();
@@ -31,7 +35,6 @@ public class ChartActivity extends AppCompatActivity {
         // tab 메뉴 아이콘 설정
         tabLayout.getTabAt(0).setIcon(R.drawable.temp);
         tabLayout.getTabAt(1).setIcon(R.drawable.temp);
-
     }
 
     private class ChartPagerAdapter extends FragmentPagerAdapter{
@@ -52,6 +55,11 @@ public class ChartActivity extends AppCompatActivity {
         public int getCount() {
             return arrFragments.length;
         }
+    }
+
+    public void uiSetting(){
+        toolbar = (Toolbar) findViewById(R.id.toolBar);
+        toolbar.setTitle("CalendarActivity");
     }
 
 }
