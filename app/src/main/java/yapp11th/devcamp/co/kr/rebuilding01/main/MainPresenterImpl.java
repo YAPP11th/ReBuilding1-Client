@@ -1,4 +1,4 @@
-package yapp11th.devcamp.co.kr.rebuilding01;
+package yapp11th.devcamp.co.kr.rebuilding01.main;
 
 import org.joda.time.DateTime;
 

@@ -12,10 +12,8 @@ import retrofit2.http.POST;
 
 public interface NetworkInterface {
     @FormUrlEncoded
-
     @POST("/users/pushExample")
     Call<Example> usersPushExample(@Field("data1") String data1, @Field("data2") String data2);
-
 
     @POST("/users/abcd")
     Call<Example> usersAbcd(@Body Example example);

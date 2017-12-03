@@ -1,6 +1,5 @@
 package yapp11th.devcamp.co.kr.rebuilding01.calendarWork;
 
-import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -12,7 +11,6 @@ import android.view.MenuItem;
 import com.roomorama.caldroid.CaldroidFragment;
 
 import yapp11th.devcamp.co.kr.rebuilding01.R;
-import yapp11th.devcamp.co.kr.rebuilding01.Statistics.ChartActivity;
 
 public class CalendarActivity extends AppCompatActivity {
 

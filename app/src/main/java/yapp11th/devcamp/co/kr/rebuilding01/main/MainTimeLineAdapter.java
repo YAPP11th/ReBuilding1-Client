@@ -1,4 +1,4 @@
-package yapp11th.devcamp.co.kr.rebuilding01;
+package yapp11th.devcamp.co.kr.rebuilding01.main;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +9,8 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import yapp11th.devcamp.co.kr.rebuilding01.R;
 
 /**
  * Created by ridickle on 2017. 9. 23..

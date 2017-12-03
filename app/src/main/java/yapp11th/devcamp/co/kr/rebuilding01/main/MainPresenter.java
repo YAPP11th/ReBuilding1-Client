@@ -1,4 +1,4 @@
-package yapp11th.devcamp.co.kr.rebuilding01;
+package yapp11th.devcamp.co.kr.rebuilding01.main;
 
 import org.joda.time.DateTime;
 
@@ -13,12 +13,13 @@ public interface MainPresenter {
     void initData();
     void dateClickEvent(DateTime dateTime);
 
-    // 3. 뷰의 이벤트와 매치되어 실행할 이벤트 모음
+    // 3. 액티비티와 매치되어 있음
     public interface View {
         // 해당 Presenter에서 사용할 View 구현
         void dateClick(String string);
     }
 
+    // 3. 프레그먼트와 매치되어 있음
     public interface Fragment {
         // 해당 Presenter에서 사용할 Fragment 구현
         void addDatas(List<Work> workList);

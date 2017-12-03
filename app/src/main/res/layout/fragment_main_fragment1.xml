@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="yapp11th.devcamp.co.kr.rebuilding01.MainFragment1">
+    tools:context="yapp11th.devcamp.co.kr.rebuilding01.main.MainFragment1">
 
     <LinearLayout
         android:layout_width="match_parent"

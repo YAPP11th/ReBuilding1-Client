@@ -1,4 +1,4 @@
-package yapp11th.devcamp.co.kr.rebuilding01;
+package yapp11th.devcamp.co.kr.rebuilding01.main;
 
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;

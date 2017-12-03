@@ -1,4 +1,4 @@
-package yapp11th.devcamp.co.kr.rebuilding01;
+package yapp11th.devcamp.co.kr.rebuilding01.main;
 
 /**
  * Created by ridickle on 2017. 8. 24..

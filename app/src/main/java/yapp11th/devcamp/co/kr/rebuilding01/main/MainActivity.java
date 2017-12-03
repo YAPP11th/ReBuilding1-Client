@@ -1,8 +1,5 @@
-package yapp11th.devcamp.co.kr.rebuilding01;
+package yapp11th.devcamp.co.kr.rebuilding01.main;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,9 +7,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -24,7 +18,8 @@ import noman.weekcalendar.listener.OnDateClickListener;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import yapp11th.devcamp.co.kr.rebuilding01.Statistics.ChartActivity;
+import yapp11th.devcamp.co.kr.rebuilding01.R;
+import yapp11th.devcamp.co.kr.rebuilding01.statistics.ChartActivity;
 import yapp11th.devcamp.co.kr.rebuilding01.calendarWork.CalendarActivity;
 import yapp11th.devcamp.co.kr.rebuilding01.push.Example;
 import yapp11th.devcamp.co.kr.rebuilding01.push.NetworkHelper;
@@ -39,9 +34,9 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
 
     private WeekCalendar mWeekCalendar;
     public static double width, height;
-    public static ImageButton timeLineButton;
-    private FragmentTransaction fragmentTransaction;
-    private Fragment fragmentFrame;
+//    public static ImageButton timeLineButton;
+//    private FragmentTransaction fragmentTransaction;
+//    private Fragment fragmentFrame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +46,9 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         String token = FirebaseInstanceId.getInstance().getToken();
         Log.d(TAG, token + "");
 
-        presentSetting();
+        mPresenter = MainPresenterImpl.newInstance(this);
         uiSetting();
         networkSetting();
-    }
-
-    private void presentSetting() {
-        mPresenter = MainPresenterImpl.newInstance(this);
     }
 
     void uiSetting() {
@@ -73,18 +64,18 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
             }
         });
 
-        timeLineButton = (ImageButton) findViewById(R.id.mainTimeLineButton);
-        timeLineButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment f = fragmentFrame instanceof MainFragment1 == true ?
-                        MainFragment2.newInstance() : MainFragment1.newInstance();
-                fragmentFrame = f;
-                fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.mainFragment, fragmentFrame);
-                fragmentTransaction.commit();
-            }
-        });
+//        timeLineButton = (ImageButton) findViewById(R.id.mainTimeLineButton);
+//        timeLineButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Fragment f = fragmentFrame instanceof MainFragment1 == true ?
+//                        MainFragment2.newInstance() : MainFragment1.newInstance();
+//                fragmentFrame = f;
+//                fragmentTransaction = getFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.mainFragment, fragmentFrame);
+//                fragmentTransaction.commit();
+//            }
+//        });
     }
 
     private void networkSetting() {
@@ -120,26 +111,26 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     }
 
     // 해상도에 맞춰 recyclerView 설정
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-
-        FrameLayout mainFragment = (FrameLayout) findViewById(R.id.mainFragment);
-
-        width = mainFragment.getWidth();
-        height = mainFragment.getHeight();
-
-        Log.d(TAG, "width : " + width + "\nheight : " + height);
-
-        FragmentManager fm = getFragmentManager();
-        fragmentTransaction = fm.beginTransaction();
-        fragmentFrame = MainFragment1.newInstance();
-        if(flag == 0) {     // 임시 땜빵
-            fragmentTransaction.add(R.id.mainFragment, fragmentFrame);
-            fragmentTransaction.commit();
-        }
-        flag = 1;
-    }
+//    @Override
+//    public void onWindowFocusChanged(boolean hasFocus) {
+//        super.onWindowFocusChanged(hasFocus);
+//
+//        FrameLayout mainFragment = (FrameLayout) findViewById(R.id.mainFragment);
+//
+//        width = mainFragment.getWidth();
+//        height = mainFragment.getHeight();
+//
+//        Log.d(TAG, "width : " + width + "\nheight : " + height);
+//
+//        FragmentManager fm = getFragmentManager();
+//        fragmentTransaction = fm.beginTransaction();
+//        fragmentFrame = MainFragment1.newInstance();
+//        if(flag == 0) {     // 임시 땜빵
+//            fragmentTransaction.add(R.id.mainFragment, fragmentFrame);
+//            fragmentTransaction.commit();
+//        }
+//        flag = 1;
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

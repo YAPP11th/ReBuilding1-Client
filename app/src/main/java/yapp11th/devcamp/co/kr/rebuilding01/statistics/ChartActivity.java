@@ -1,4 +1,4 @@
-package yapp11th.devcamp.co.kr.rebuilding01.Statistics;
+package yapp11th.devcamp.co.kr.rebuilding01.statistics;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;

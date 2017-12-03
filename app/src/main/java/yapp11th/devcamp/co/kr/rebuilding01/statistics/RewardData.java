@@ -1,4 +1,4 @@
-package yapp11th.devcamp.co.kr.rebuilding01.Statistics;
+package yapp11th.devcamp.co.kr.rebuilding01.statistics;
 
 /**
  * Created by hayoung on 2017-09-24.

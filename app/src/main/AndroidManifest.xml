@@ -15,7 +15,7 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:replace="theme, icon, label">
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -42,9 +42,9 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".Statistics.ChartActivity" />
+        <activity android:name=".statistics.ChartActivity" />
         <activity android:name=".calendarWork.CalendarActivity" />
-        <activity android:name=".Setting.SettingActivity" />
+        <activity android:name=".setting.SettingActivity" />
         <activity android:name=".workTimeLine.TimeLineActivity" />
         <activity android:name=".KaKao.KakaoLoginActivity"></activity>
 

@@ -1,9 +1,8 @@
-package yapp11th.devcamp.co.kr.rebuilding01.Setting;
+package yapp11th.devcamp.co.kr.rebuilding01.setting;
 
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Switch;
